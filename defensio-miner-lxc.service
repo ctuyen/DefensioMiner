@@ -1,0 +1,39 @@
+[Unit]
+Description=Defensio Miner Service (LXC Container)
+After=network.target
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/root/DefensioMiner
+
+# Load environment variables from LXC-specific config
+EnvironmentFile=/root/DefensioMiner/.env.lxc
+
+# Command to run
+ExecStart=/usr/bin/npm start
+
+# Restart policy - always restart on failure
+Restart=always
+RestartSec=10
+
+# Resource limits (optional but recommended for LXC)
+# Limit memory to prevent OOM in container
+MemoryMax=8G
+MemoryHigh=7G
+
+# CPU accounting
+CPUAccounting=true
+
+# Logging
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=defensio-miner
+
+# Security hardening
+NoNewPrivileges=true
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target
+
