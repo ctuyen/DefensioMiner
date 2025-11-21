@@ -16,7 +16,7 @@ const toHex = (value) => Buffer.from(value, 'utf8').toString('hex');
 
 const ensureDir = async (dirPath) => fs.mkdir(dirPath, { recursive: true });
 
-const DONATION_DELAY_MS = 2000;
+const DONATION_DELAY_MS = 1000;
 
 const deriveKnownAddresses = async (keyAgent, walletJson) => {
   const stakeKeyIndex = walletJson.meta?.stakeKeyIndex ?? 0;
