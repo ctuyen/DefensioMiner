@@ -37,7 +37,7 @@ export const walletFolderPath = (root, id) => path.join(root, formatWalletId(id)
 export const loadWalletJson = async (folderPath) => readJson(path.join(folderPath, 'wallet.json'));
 
 export const saveWalletJson = async (folderPath, payload) => {
-  await fs.mkdir(folderPath, { recursive: true });
+  await fs.mkdir(folderPath, { recursive: true, mode: 0o700 });
   await writeJson(path.join(folderPath, 'wallet.json'), payload);
 };
 

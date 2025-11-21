@@ -13,8 +13,10 @@ export const readJson = async (filePath, defaultValue = null) => {
   }
 };
 
-export const writeJson = async (filePath, data) => {
-  await fs.mkdir(path.dirname(filePath), { recursive: true });
-  await fs.writeFile(filePath, `${JSON.stringify(data, null, 2)}\n`, 'utf8');
+export const writeJson = async (filePath, data, options = {}) => {
+  const dirMode = options.dirMode ?? 0o700;
+  const fileMode = options.fileMode ?? 0o600;
+  await fs.mkdir(path.dirname(filePath), { recursive: true, mode: dirMode });
+  await fs.writeFile(filePath, `${JSON.stringify(data, null, 2)}\n`, { encoding: 'utf8', mode: fileMode });
 };
 

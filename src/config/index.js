@@ -30,7 +30,7 @@ export const resolvePaths = () => {
 };
 
 export const ensureDirectory = async (targetPath) => {
-  await fs.mkdir(targetPath, { recursive: true });
+  await fs.mkdir(targetPath, { recursive: true, mode: 0o700 });
 };
 
 export const ensureDefaultStructure = async () => {
